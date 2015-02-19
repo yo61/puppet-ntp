@@ -22,7 +22,7 @@ class ntp (
   $iburst_enabled = false,
 ) inherits ::ntp::params {
 
-  validate_boolean($iburst_enabled)
+  validate_bool($iburst_enabled)
   $iburst = $iburst_enabled ? {
     true    => ' iburst',
     default => '',
