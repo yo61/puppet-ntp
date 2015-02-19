@@ -11,15 +11,22 @@
 #  include ntp
 #
 class ntp (
-  $package_name = $::ntp::params::package_name,
-  $service_name = $::ntp::params::service_name,
-  $config_file  = $::ntp::params::config_file,
-  $template     = $::ntp::params::template,
-  $tinker       = [],
-  $server       = $::ntp::params::server,
-  $restrict     = $::ntp::params::restrict,
-  $logfile      = false,
+  $package_name   = $::ntp::params::package_name,
+  $service_name   = $::ntp::params::service_name,
+  $config_file    = $::ntp::params::config_file,
+  $template       = $::ntp::params::template,
+  $tinker         = [],
+  $server         = $::ntp::params::server,
+  $restrict       = $::ntp::params::restrict,
+  $logfile        = false,
+  $iburst_enabled = false,
 ) inherits ::ntp::params {
+
+  validate_boolean($iburst_enabled)
+  $iburst = $iburst_enabled ? {
+    true    => ' iburst',
+    default => '',
+  }
 
   # Main package and service it provides
   package { $package_name: ensure => installed }
