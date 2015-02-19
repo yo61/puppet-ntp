@@ -30,7 +30,7 @@ restrict -6 ::1
 # Use public servers from the pool.ntp.org project.
 # Please consider joining the pool (http://www.pool.ntp.org/join.html).
 <% @server.each do |i| -%>
-server <%= i %>
+server <%= i %><%= @iburst %>
 <% end -%>
 
 #broadcast 192.168.1.255 autokey	# broadcast server
